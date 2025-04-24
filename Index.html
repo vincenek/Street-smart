@@ -1,0 +1,34 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StreetSmart - Local Insights</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Urbanist:wght@400;700&display=swap');
+        body { font-family: 'Urbanist', sans-serif; }
+        .handwritten { font-family: 'Caveat', cursive; }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <header class="p-4 bg-gray-800">
+        <h1 class="handwritten text-4xl text-orange-500">StreetSmart</h1>
+        <p class="text-gray-400">Real talk from real people</p>
+    </header>
+
+    <main class="p-4">
+        <section class="mb-8">
+            <a href="submit.html" class="bg-orange-600 px-4 py-2 rounded">Drop a Street Tip</a>
+            <input type="text" placeholder="Search your area..." class="ml-4 p-2 text-gray-900 rounded">
+        </section>
+
+        <div class="grid gap-4" id="tipsContainer">
+            <!-- Tips will load here -->
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
