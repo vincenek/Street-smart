@@ -1,35 +1,43 @@
 <!-- submit.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <!-- Same head as index.html -->
+    <title>Submit Tip</title>
+    <style>
+        body { font-family: Arial; max-width: 600px; margin: 0 auto; }
+        input, textarea, select { width: 100%; margin: 5px 0; }
+    </style>
 </head>
-<body class="bg-gray-900 text-gray-100">
-    <header class="p-4 bg-gray-800">
-        <h1 class="handwritten text-4xl text-orange-500">Submit a Tip</h1>
-    </header>
+<body>
+    <h1>Submit Tip</h1>
+    <form onsubmit="return submitTip()">
+        <input type="text" id="location" placeholder="Location" required>
+        <textarea id="tip" placeholder="Your tip..." maxlength="280" required></textarea>
+        <select id="category">
+            <option value="safety">Safety</option>
+            <option value="scam">Scam Alert</option>
+        </select>
+        <input type="text" id="alias" placeholder="Alias (optional)">
+        <button type="submit">Submit</button>
+    </form>
 
-    <main class="p-4 max-w-2xl mx-auto">
-        <form action="YOUR_GOOGLE_FORM_URL" method="POST" class="space-y-4">
-            <div>
-                <label>Location</label>
-                <input name="location" required class="w-full p-2 text-gray-900 rounded">
-            </div>
-            <div>
-                <label>Tip (280 chars max)</label>
-                <textarea name="tip" maxlength="280" required class="w-full p-2 text-gray-900 rounded"></textarea>
-            </div>
-            <div>
-                <label>Category</label>
-                <select name="category" class="w-full p-2 text-gray-900 rounded">
-                    <option>Safety</option>
-                    <option>Scam Alert</option>
-                    <option>Vendor</option>
-                    <option>Shortcut</option>
-                </select>
-            </div>
-            <button type="submit" class="bg-orange-600 px-4 py-2 rounded">Submit Tip</button>
-        </form>
-    </main>
+    <script>
+        function submitTip() {
+            const tip = {
+                location: document.getElementById('location').value,
+                text: document.getElementById('tip').value,
+                category: document.getElementById('category').value,
+                alias: document.getElementById('alias').value
+            };
+
+            let tips = JSON.parse(localStorage.getItem('tips') || '[]');
+            tips.push(tip);
+            localStorage.setItem('tips', JSON.stringify(tips));
+
+            alert('Tip submitted!');
+            window.location.href = 'index.html';
+            return false;
+        }
+    </script>
 </body>
 </html>
