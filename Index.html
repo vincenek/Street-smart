@@ -1,34 +1,33 @@
 <!-- index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>StreetSmart - Local Insights</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>StreetSmart</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Urbanist:wght@400;700&display=swap');
-        body { font-family: 'Urbanist', sans-serif; }
-        .handwritten { font-family: 'Caveat', cursive; }
+        body { font-family: Arial; max-width: 600px; margin: 0 auto; }
+        .tip { border: 1px solid #ddd; padding: 15px; margin: 10px 0; }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-100">
-    <header class="p-4 bg-gray-800">
-        <h1 class="handwritten text-4xl text-orange-500">StreetSmart</h1>
-        <p class="text-gray-400">Real talk from real people</p>
-    </header>
+<body>
+    <h1>StreetSmart 🏙️</h1>
+    <a href="submit.html">Submit Tip</a>
+    
+    <div id="tips"></div>
 
-    <main class="p-4">
-        <section class="mb-8">
-            <a href="submit.html" class="bg-orange-600 px-4 py-2 rounded">Drop a Street Tip</a>
-            <input type="text" placeholder="Search your area..." class="ml-4 p-2 text-gray-900 rounded">
-        </section>
-
-        <div class="grid gap-4" id="tipsContainer">
-            <!-- Tips will load here -->
-        </div>
-    </main>
-
-    <script src="app.js"></script>
+    <script>
+        // Load tips from localStorage
+        let tips = JSON.parse(localStorage.getItem('tips') || '[]');
+        
+        // Display latest 20
+        tips.slice(-20).reverse().forEach(tip => {
+            document.getElementById('tips').innerHTML += `
+                <div class="tip">
+                    <h3>${tip.location} • ${tip.category}</h3>
+                    <p>${tip.text}</p>
+                    <small>${tip.alias || 'Anonymous'}</small>
+                </div>
+            `;
+        });
+    </script>
 </body>
 </html>
